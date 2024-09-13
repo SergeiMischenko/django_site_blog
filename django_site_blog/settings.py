@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "taggit",
     "django.contrib.sites",
     "django.contrib.sitemaps",
+    "django.contrib.postgres",
 ]
 
 MIDDLEWARE = [
@@ -86,13 +87,13 @@ WSGI_APPLICATION = "django_site_blog.wsgi.application"
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_site_blog_db',
-        'USER': 'blog',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "django_site_blog_db",
+        "USER": "blog",
+        "PASSWORD": "12345",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
