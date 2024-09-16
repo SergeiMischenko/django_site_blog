@@ -12,9 +12,9 @@
 	{% endblock %}
 </div>
 {% if messages %}
-    {% for message in messages %}
-        {{ message.tags }} {{ message }}
-    {% endfor %}
+	{% for message in messages %}
+		{{ message.tags }} {{ message }}
+	{% endfor %}
 {% endif %}
 <div id="sidebar">
 	<h2>My blog</h2>
@@ -25,13 +25,15 @@
 	<hr>
 	{% if user.is_authenticated %}
 		Hi {{ user.username }}!
+		<p><a href="{% url 'users-profile' %}">My profile</a></p>
 		<form action="{% url 'logout' %}" method="post">
 			{% csrf_token %}
 			<a href="#" onclick="parentNode.submit();">Log Out</a>
 		</form>
 	{% else %}
 		<p>You are not logged in</p>
-		<a href="{% url 'login' %}">Log In</a>
+		<p><a href="{% url 'login' %}">Log In</a></p>
+		<p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
 	{% endif %}
 	<hr>
 	<h3>Latest posts</h3>
