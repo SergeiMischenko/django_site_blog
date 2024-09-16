@@ -28,6 +28,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 SITE_ID = 1
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.postgres",
-    'accounts.apps.AccountsConfig',
+    "accounts.apps.AccountsConfig",
 ]
 
 MIDDLEWARE = [
@@ -145,4 +146,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"

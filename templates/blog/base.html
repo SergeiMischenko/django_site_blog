@@ -11,6 +11,11 @@
 	{% block content %}
 	{% endblock %}
 </div>
+{% if messages %}
+    {% for message in messages %}
+        {{ message.tags }} {{ message }}
+    {% endfor %}
+{% endif %}
 <div id="sidebar">
 	<h2>My blog</h2>
 	<p>
