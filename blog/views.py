@@ -85,6 +85,10 @@ def post_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
     comment = None
     # Комментарий был отправлен
+    comment_post = request.POST.copy()
+    if request.user.is_authenticated:
+        comment_post['name'] = request.user.username
+        comment_post['email'] = request.user.email
     form = CommentForm(request.POST)
     if form.is_valid():
         # Создать объект класса Comment, но пока не сохранять в базу данных
