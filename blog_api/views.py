@@ -1,21 +1,35 @@
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, status, filters
+from rest_framework import filters, generics, status
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from blog.models import Post
+from blog_api.permissions import IsAuthorOrReadOnly
 from blog_api.serializers import PostSerializer
 
 
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 5
+    page_size_query_param = "page_size"
+    max_page_size = 10
+
+
 class PostList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthorOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['author']
-    search_fields = ['body', 'author__username']
-    ordering_fields = ['author_id', 'publish']
-    ordering = ['title']
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_fields = ["author"]
+    search_fields = ["body", "author__username"]
+    ordering_fields = ["author_id", "publish"]
+    ordering = ["title"]
+    pagination_class = StandardResultsSetPagination
     # def get_queryset(self):
     #     user = self.request.user
     #     return Post.objects.filter(author=user)
@@ -25,13 +39,15 @@ class UserPostList(generics.ListAPIView):
     serializer_class = PostSerializer
 
     def get_queryset(self):
-        user = self.kwargs['id']
+        user = self.kwargs["id"]
         return Post.objects.filter(author=user)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthorOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
 
 # class PostList(APIView):
 #     def get(self, request, format=None):
