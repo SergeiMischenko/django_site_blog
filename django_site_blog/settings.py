@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # API new
     "rest_framework",
     "blog_api.apps.BlogApiConfig",
+    'django_filters',
 ]
 
 REST_FRAMEWORK = {
