@@ -99,6 +99,7 @@ celerybeat-schedule.*
 # Environments
 docker/env/.env.dev
 .venv
+.env
 env/
 venv/
 ENV/
@@ -133,4 +134,3 @@ GitHub.sublime-settings
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
-!.vscode/extensions.json!/.env
